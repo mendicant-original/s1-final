@@ -4,12 +4,25 @@ module Bricks
     
     attr_accessor :options
     
-    def initialize(*args)      
-      @options = extract_options!(args)      
-      
-      args.first.each do |row_data|
-        rows << Bricks::Row.new(row_data)
+    def initialize(*args)
+      @options = extract_options!(args)
+      self.column_names = @options[:column_names] 
+      args.first.each_with_index do |row_data, index|
+        self << Bricks::Row.new(row_data)
       end unless args.first.nil?
+    end
+
+    def columns
+      @columns ||= []
+    end
+    def column(id)
+      columns[id] ||= Bricks::Column.new
+    end
+    
+    def column_names=(names)
+      unless names.nil?
+        names.each_with_index { |name, index| column(index).name = name }
+      end
     end
     
     def rows
@@ -25,12 +38,8 @@ module Bricks
     def empty?
       rows.empty?
     end
-    
-    def [](index)
-      rows[index]
-    end
-    def <<(value)
-      rows << value
+    def <<(new_row)
+      rows << new_row
     end
     
   private
