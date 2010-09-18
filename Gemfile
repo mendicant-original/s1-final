@@ -1,3 +1,3 @@
-source "http://rubyforge.org"
+source :rubygems
 
 gem 'rspec'
