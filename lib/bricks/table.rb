@@ -12,11 +12,11 @@ module Bricks
       end unless args.first.nil?
     end
 
-    def columns
-      @columns ||= []
+    def column_definitions
+      @column_definitions ||= []
     end
     def column(id)
-      columns[id] ||= Bricks::Column.new
+      column_definitions[id] ||= Bricks::Column.new
     end
     
     def column_names=(names)

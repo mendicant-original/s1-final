@@ -33,6 +33,7 @@ describe Bricks::Table do
     end
     
   end
+  
   context "initialized empty" do
     
     it "should allow appending" do
@@ -42,7 +43,7 @@ describe Bricks::Table do
     end
     
   end
-  context "columns" do
+  context "column names" do
     
     it "should allow to set the column name of a given column" do
       @table = Bricks::Table.new(@data)
@@ -57,5 +58,19 @@ describe Bricks::Table do
       @table.column(2).name.should == 'Email'
     end
     
+  end
+  
+  context "columns" do
+    before do
+      @table = Bricks::Table.new(@data)
+    end
+    it "should allow you to get a given column by index" do
+      @table.columns[0].should == [['lucas']]
+    end
+    
+    it "should allow you to get a given column by name" do
+      @table.columns['Nombre'].should == [['lucas']]
+      
+    end
   end
 end
