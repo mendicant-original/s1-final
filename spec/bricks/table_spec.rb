@@ -15,7 +15,7 @@ describe Bricks::Table do
   context "being initialized" do
     it "should be initializable with and array of arrays" do
       table = Bricks::Table.new(@data)
-      table[0].should == @data[0]
+      table[0].to_a.should == @data[0]
     end
     it "should be able to receive only options, with no data" do
       table = Bricks::Table.new(@options)
@@ -23,7 +23,7 @@ describe Bricks::Table do
     end
     it "should be able to receive data and options" do
       table = Bricks::Table.new(@data, @options)
-      table[0].should == @data[0]
+      table[0].to_a.should == @data[0]
       table.options.should == @options
     end
   end

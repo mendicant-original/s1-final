@@ -7,8 +7,8 @@ module Bricks
     def initialize(*args)      
       @options = extract_options!(args)      
       
-      args.first.each do |row|
-        rows << row
+      args.first.each do |row_data|
+        rows << Bricks::Row.new(row_data)
       end unless args.first.nil?
     end
     

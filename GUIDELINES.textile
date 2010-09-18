@@ -35,12 +35,9 @@ REQUIREMENTS:
 While not a complete specification, the following requirements outline
 some of the necessary features for a usable data table implementation.
 
-- It should be possible to create a new table object by initializing it
- with a two dimensional array, in which each inner array represents
- the data for a single row.
+- -It should be possible to create a new table object by initializing it with a two dimensional array, in which each inner array represents the data for a single row.-
 
-- It should also be possible to create a new table object that is empty
- at first, and gets its data appended row by row later.
+- -It should also be possible to create a new table object that is empty at first, and gets its data appended row by row later.-
 
 - It should be possible to set column names, and then refer to the
  columns by name anywhere that a column needs to be identified.
