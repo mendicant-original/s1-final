@@ -6,28 +6,29 @@ module Bricks
     
     def initialize(*args)
       @options = extract_options!(args)
-      self.column_names = @options[:column_names] 
+      self.header = @options[:header] 
       args.first.each_with_index do |row_data, index|
         self << Bricks::Row.new(row_data)
       end unless args.first.nil?
     end
 
-    def column_definitions
-      @column_definitions ||= []
-    end
-    def column(id)
-      column_definitions[id] ||= Bricks::Column.new
+    def header
+      @header ||= Hash.new { |hash, key| hash[key] = Bricks::Column.new }
     end
     
-    def column_names=(names)
+    def header=(names)
       unless names.nil?
-        names.each_with_index { |name, index| column(index).name = name }
+        names.each_with_index { |name, index| header[index].name = name }
       end
     end
     
     def rows
       @rows ||= []
     end
+    
+    # def columns
+    #   rows.transpose
+    # end
     
     def each
       rows.each do |row|

@@ -38,7 +38,7 @@ describe Bricks::Table do
     
     it "should allow appending" do
       @table = Bricks::Table.new
-      @table << [1, "Rolando", "rola@tony.com"]
+      @table.rows << [1, "Rolando", "rola@tony.com"]
       @table.should have(1).rows
     end
     
@@ -47,15 +47,15 @@ describe Bricks::Table do
     
     it "should allow to set the column name of a given column" do
       @table = Bricks::Table.new(@data)
-      @table.column(1).name = 'Name'
-      @table.column(1).name.should == 'Name'
+      @table.header[1].name = 'Name'
+      @table.header[1].name.should == 'Name'
     end
     
     it "should set column names on initialization" do
-      @table = Bricks::Table.new(@data, :column_names => %w(id Name Email))
-      @table.column(0).name.should == 'id'
-      @table.column(1).name.should == 'Name'
-      @table.column(2).name.should == 'Email'
+      @table = Bricks::Table.new(@data, :header => %w(id Name Email))
+      @table.header[0].name.should == 'id'
+      @table.header[1].name.should == 'Name'
+      @table.header[2].name.should == 'Email'
     end
     
   end
@@ -70,7 +70,6 @@ describe Bricks::Table do
     
     it "should allow you to get a given column by name" do
       @table.columns['Nombre'].should == [['lucas']]
-      
     end
   end
 end
