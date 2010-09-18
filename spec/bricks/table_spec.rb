@@ -27,4 +27,13 @@ describe Bricks::Table do
       table.options.should == @options
     end
   end
+  context "initialized empty" do
+    before(:each) do
+      @table = Bricks::Table.new
+    end
+    it "should allow appending" do
+      @table << [1, "Rolando", "rola@tony.com"]
+      @table.should have(1).rows
+    end
+  end
 end

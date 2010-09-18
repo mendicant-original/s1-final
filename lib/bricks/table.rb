@@ -29,6 +29,9 @@ module Bricks
     def [](index)
       rows[index]
     end
+    def <<(value)
+      rows << value
+    end
     
   private
   
