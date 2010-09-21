@@ -50,14 +50,22 @@ describe Bricks::Table do
     end
     it "should keep the columns updated when adding rows"  do
       @table.columns.should have(3).elements
+      @table.rows.should have(1).element
       @table.columns[0][0].should == @row[0]
       @table.columns[1][0].should == @row[1]
       @table.columns[2][0].should == @row[2]
     end
+    it "should keep the columns updated when adding rows (many times)"  do
+      lambda {
+        lambda {
+          @table.add_row [2, "Jose", "rola@cuac.com"]
+        }.should_not change(@table.columns, :size)        
+      }.should change(@table.rows, :size).by(1)
+    end
   end
   context "handling columns" do
     before do
-      @column = [1, "Rolando", "rola@tony.com"]
+      @column = [1, 2, 3]
       @table = Bricks::Table.new
       @table.add_column @column
     end
@@ -75,20 +83,28 @@ describe Bricks::Table do
       @table.rows[1][0].should == @column[1]
       @table.rows[2][0].should == @column[2]
     end
+    it "should keep the rows updated when adding columns (many times)"  do
+      lambda {
+        lambda {
+          @table.add_column %w(mary john lucas)
+        }.should change(@table.columns, :size).by(1)        
+      }.should_not change(@table.rows, :size)
+    end
   end
   context "column names" do
+
     it "should allow to set the column name of a given column" do
       @table = Bricks::Table.new(@data)
       @table.header[1].name = 'Name'
       @table.header[1].name.should == 'Name'
     end
-  #   
-  #   it "should set column names on initialization" do
-  #     @table = Bricks::Table.new(@data, :header => %w(id Name Email))
-  #     @table.header[0].name.should == 'id'
-  #     @table.header[1].name.should == 'Name'
-  #     @table.header[2].name.should == 'Email'
-  #   end
+    
+    it "should set column names on initialization" do
+      @table = Bricks::Table.new(@data, :header => %w(id Name Email))
+      @table.header[0].name.should == 'id'
+      @table.header[1].name.should == 'Name'
+      @table.header[2].name.should == 'Email'
+    end
   end
   
   context "columns" do
