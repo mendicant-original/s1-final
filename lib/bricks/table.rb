@@ -8,7 +8,7 @@ module Bricks
       @options = extract_options!(args)
       @rows ||= Bricks::Index.new
       @columns ||= Bricks::Index.new
-      data = args.first
+      data = args.first.dup # to avoid alter original data
       
       if @options[:header]
         columns.header = @options[:header]
