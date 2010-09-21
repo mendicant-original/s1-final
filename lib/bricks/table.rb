@@ -8,7 +8,7 @@ module Bricks
       @options = extract_options!(args)
       self.header = @options[:header] 
       args.first.each_with_index do |row_data, index|
-        self << Bricks::Row.new(row_data)
+        self << row_data
       end unless args.first.nil?
     end
 
@@ -23,12 +23,8 @@ module Bricks
     end
     
     def rows
-      @rows ||= []
+      @rows ||= Bricks::RowsContainer.new
     end
-    
-    # def columns
-    #   rows.transpose
-    # end
     
     def each
       rows.each do |row|

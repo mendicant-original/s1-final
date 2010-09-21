@@ -3,7 +3,8 @@ require "spec_helper"
 describe Bricks::Table do
   before(:each) do
     @data = [
-        [ 1, "lucas", "lucasefe@hh.com"]
+        [ 1, "lucas", "lucas@vera.com"],
+        [ 2, "tam", "tam@vera.com"]
       ]
     @options = { :header => %w(id name email) }
   end
@@ -33,43 +34,45 @@ describe Bricks::Table do
     end
     
   end
-  
-  context "initialized empty" do
-    
-    it "should allow appending" do
-      @table = Bricks::Table.new
-      @table.rows << [1, "Rolando", "rola@tony.com"]
-      @table.should have(1).rows
-    end
-    
+  it "should allow appending" do
+    @table = Bricks::Table.new
+    @table.rows << [1, "Rolando", "rola@tony.com"]
+    @table.should have(1).rows
   end
-  context "column names" do
-    
-    it "should allow to set the column name of a given column" do
-      @table = Bricks::Table.new(@data)
-      @table.header[1].name = 'Name'
-      @table.header[1].name.should == 'Name'
-    end
-    
-    it "should set column names on initialization" do
-      @table = Bricks::Table.new(@data, :header => %w(id Name Email))
-      @table.header[0].name.should == 'id'
-      @table.header[1].name.should == 'Name'
-      @table.header[2].name.should == 'Email'
-    end
-    
-  end
-  
-  context "columns" do
-    before do
-      @table = Bricks::Table.new(@data)
-    end
-    it "should allow you to get a given column by index" do
-      @table.columns[0].should == [['lucas']]
-    end
-    
-    it "should allow you to get a given column by name" do
-      @table.columns['Nombre'].should == [['lucas']]
+  it "should store Cell objects" do
+    @table = Bricks::Table.new
+    @table.rows << [1, "Rolando", "rola@tony.com"]
+    @table.rows.each do |row|
+      row.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
     end
   end
+  # context "column names" do
+  #   
+  #   it "should allow to set the column name of a given column" do
+  #     @table = Bricks::Table.new(@data)
+  #     @table.header[1].name = 'Name'
+  #     @table.header[1].name.should == 'Name'
+  #   end
+  #   
+  #   it "should set column names on initialization" do
+  #     @table = Bricks::Table.new(@data, :header => %w(id Name Email))
+  #     @table.header[0].name.should == 'id'
+  #     @table.header[1].name.should == 'Name'
+  #     @table.header[2].name.should == 'Email'
+  #   end
+  #   
+  # end
+  # 
+  # context "columns" do
+  #   before do
+  #     @table = Bricks::Table.new(@data)
+  #   end
+  #   it "should allow you to get a given column by index" do
+  #     @table.columns[1].should == ['lucas', 'tam']
+  #   end
+  #   
+  #   it "should allow you to get a given column by name" do
+  #     @table.columns['Nombre'].should == [['lucas']]
+  #   end
+  # end
 end

@@ -1,0 +1,15 @@
+h1. Bricks
+
+h2. Basic Usage
+
+Create a Table object
+
+<pre>
+table = Bricks::Table.new
+</pre>
+
+Add a row
+
+<pre>
+table.rows << [1, 2, 3]
+</pre>
