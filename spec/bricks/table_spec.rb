@@ -106,18 +106,17 @@ describe Bricks::Table do
 
     it "should allow to set the column name of a given column" do
       @table = Bricks::Table.new(@data)
-      @table.header[1].name = 'Name'
-      @table.header[1].name.should == 'Name'
+      @table.columns.header['id'].index = 0
+      @table.columns.header['Name'].index = 1
     end
     
     it "should set column names on initialization" do
       @table = Bricks::Table.new(@data, :header => %w(id Name Email))
-      @table.header[0].name.should == 'id'
-      @table.header[1].name.should == 'Name'
-      @table.header[2].name.should == 'Email'
+      @table.columns.header['id'].index.should == 0
+      @table.columns.header['Name'].index.should == 1
+      @table.columns.header['Email'].index.should == 2
     end
   end
-  
   context "columns" do
     before do
       @table = Bricks::Table.new(@data)
@@ -125,8 +124,9 @@ describe Bricks::Table do
     it "should allow you to get a given column by index" do
       @table.columns[1].should == ['lucas', 'tam']
     end
-    # it "should allow you to get a given column by name" do
-    #   @table.columns['Nombre'].should == [['lucas']]
-    # end
+    it "should allow you to get a given column by name" do
+      @table.columns.header['Nombre'].index = 1
+      @table.columns['Nombre'].should == ['lucas', 'tam']
+    end
   end
 end

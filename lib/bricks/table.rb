@@ -2,10 +2,10 @@ module Bricks
   class Table
     include Enumerable
     attr_accessor :options
-
+    
     def initialize(*args)
       @options = extract_options!(args)
-      self.header = @options[:header] 
+      columns.header = @options[:header]
       args.first.each_with_index do |row_data, index|
         add_row row_data
       end unless args.first.nil?
@@ -14,16 +14,19 @@ module Bricks
     def add_row(new_row)
       synchronize(new_row, rows, columns)
     end
+    
     def add_column(new_column)
       synchronize(new_column, columns, rows)
     end
+    
     def rows
-      @rows ||= []
+      @rows ||= Bricks::Index.new
     end
     
     def columns
-      @columns ||= []
+      @columns ||= Bricks::Index.new
     end
+    
     def each
       rows.each do |row|
         yield(row)
@@ -32,15 +35,6 @@ module Bricks
     
     def empty?
       rows.empty?
-    end
-    def header
-      @header ||= Hash.new { |hash, key| hash[key] = Bricks::Column.new }
-    end
-
-    def header=(names)
-      unless names.nil?
-        names.each_with_index { |name, index| header[index].name = name }
-      end
     end
     
   private
