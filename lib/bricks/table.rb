@@ -2,9 +2,13 @@ module Bricks
   class Table
     include Enumerable
     attr_accessor :options
+    attr_reader :rows, :columns
     
     def initialize(*args)
       @options = extract_options!(args)
+      @rows ||= Bricks::Index.new
+      @columns ||= Bricks::Index.new
+      
       columns.header = @options[:header]
       args.first.each_with_index do |row_data, index|
         add_row row_data
@@ -17,14 +21,6 @@ module Bricks
     
     def add_column(new_column)
       synchronize(new_column, columns, rows)
-    end
-    
-    def rows
-      @rows ||= Bricks::Index.new
-    end
-    
-    def columns
-      @columns ||= Bricks::Index.new
     end
     
     def each
