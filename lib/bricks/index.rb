@@ -12,10 +12,10 @@ module Bricks
       index = index_for(index)
       super(index)
     end
+    
   private
     def index_for(index)
       if index.kind_of?(String) and !header[index].nil?
-        puts header[index].index
         header[index].index
       else
         index
