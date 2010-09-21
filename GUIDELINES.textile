@@ -43,8 +43,7 @@ some of the necessary features for a usable data table implementation.
 
 - -Whether or not column names are set, it should always be possible to refer to the column by its zero-based ordinal position.-
 
-- It should be possible to lookup a cell's contents by row (zero based
- index) and column (index or column name).
+- -It should be possible to lookup a cell's contents by row (zero based index) and column (index or column name)-.
 
 - It should be possible to do all of the following row manipulations:
 

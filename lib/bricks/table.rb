@@ -8,19 +8,25 @@ module Bricks
       @options = extract_options!(args)
       @rows ||= Bricks::Index.new
       @columns ||= Bricks::Index.new
+      data = args.first
       
-      columns.header = @options[:header]
-      args.first.each_with_index do |row_data, index|
+      if @options[:header]
+        columns.header = @options[:header]
+      elsif @options[:first_row_as_header]
+        columns.header = data.shift
+      end
+      
+      data.each_with_index do |row_data, index|
         add_row row_data
       end unless args.first.nil?
     end
 
     def add_row(new_row)
-      synchronize(new_row, rows, columns)
+      add_and_update(new_row, rows, columns)
     end
     
     def add_column(new_column)
-      synchronize(new_column, columns, rows)
+      add_and_update(new_column, columns, rows)
     end
     
     def each
@@ -40,7 +46,7 @@ module Bricks
     def extract_options!(args)
       args.last.is_a?(::Hash) ? args.pop : {}
     end
-    def synchronize(array, primary, secondary )
+    def add_and_update(array, primary, secondary )
       new_array = []
       array.each_with_index do |value, index| 
         cell = build_cell(value)
