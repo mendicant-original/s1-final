@@ -102,7 +102,7 @@ describe Bricks::Table do
       @table.columns[0][2] === @table.rows[2][0]
     end
   end
-  context "column names" do
+  context "when defining column headers" do
 
     it "should allow to set the column name of a given column" do
       @table = Bricks::Table.new(@data)
@@ -117,7 +117,7 @@ describe Bricks::Table do
       @table.columns.header['Email'].index.should == 2
     end
   end
-  context "columns" do
+  context "accessingcolumns using their names" do
     before do
       @table = Bricks::Table.new(@data)
     end
@@ -128,5 +128,15 @@ describe Bricks::Table do
       @table.columns.header['Nombre'].index = 1
       @table.columns['Nombre'].should == ['lucas', 'tam']
     end
+  end
+  it "should use first row as column header" do
+    @data = [
+      ["id", "name", "email"], 
+      [1, "jose", "jose@soprano.com"]
+    ]
+    @table = Bricks::Table.new(@data, :first_row_as_header => true)
+    @table.should have(1).rows
+    @table.should have(3).columns
+    @table.columns.header.keys.should == ["id", "name", "email"]
   end
 end
