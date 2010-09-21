@@ -14,7 +14,18 @@ Add a row
   table = Bricks::Table.new
   table.columns             # => []
   table.rows                # => []
-  table.add_row [1, 2, 3]
-  table.columns             # => [[1], [2], [3]]
-  table.rows                # => [[1, 2, 3]]
+  table.add_row [1, "John", "Connor"]
+  table.columns             # => [[1], ["John"], ["Connor"]]
+  table.rows                # => [[1, "John", "Connor"]]
+</pre>
+
+Add a column
+
+<pre>
+  table = Bricks::Table.new
+  table.columns             # => []
+  table.rows                # => []
+  table.add_column [1, 2, 3]
+  table.columns             # => [[1, 2, 3]]
+  table.rows                # => [[1], [2], [3]]
 </pre>
