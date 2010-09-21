@@ -18,7 +18,7 @@ module Bricks
       
       data.each_with_index do |row_data, index|
         add_row row_data
-      end unless args.first.nil?
+      end unless data.nil?
     end
 
     def add_row(new_row)
