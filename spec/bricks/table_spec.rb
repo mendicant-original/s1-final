@@ -35,19 +35,29 @@ describe Bricks::Table do
     
   end
   context "handling rows" do
+    
     before do
       @row = [1, "Rolando", "rola@tony.com"]
       @table = Bricks::Table.new
-      @table.add_row @row      
+      @table.add_row @row
     end
+    
     it "should allow appending" do
       @table.should have(1).rows
     end
+    
+    it "should allow insertion" do
+      new_row = [2, "jose", "jose@soprano.com"]
+      @table.insert_row_at 0, new_row
+      @table.rows[0].should == new_row
+    end
+    
     it "should store Cell objects" do
       @table.rows.each do |row|
         row.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
       end
     end
+    
     it "should keep the columns updated when adding rows"  do
       @table.columns.should have(3).elements
       @table.rows.should have(1).element
@@ -55,6 +65,7 @@ describe Bricks::Table do
       @table.columns[1][0].should == @row[1]
       @table.columns[2][0].should == @row[2]
     end
+    
     it "should keep the columns updated when adding rows (many times)"  do
       lambda {
         lambda {
@@ -64,26 +75,37 @@ describe Bricks::Table do
     end
   end
   context "handling columns" do
+    
     before do
       @column = [1, 2, 3]
       @table = Bricks::Table.new
       @table.add_column @column
     end
+    
     it "should allow appending" do
       @table.should have(1).columns
       @table.columns.first.should == @column
     end
+    
+    it "should allow insertion" do
+      new_column = ["juan", "pepe", "luis"]
+      @table.insert_column_at 0, new_column
+      @table.columns[0].should == new_column
+    end
+    
     it "should store Cell objects" do
       @table.columns.each do |column|
         column.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
       end
     end
+    
     it "should keep the columns updated when adding rows"  do
       @table.rows.should have(3).elements
       @table.rows[0][0].should == @column[0]
       @table.rows[1][0].should == @column[1]
       @table.rows[2][0].should == @column[2]
     end
+    
     it "should keep the rows updated when adding columns (many times)"  do
       lambda {
         lambda {
@@ -91,8 +113,10 @@ describe Bricks::Table do
         }.should change(@table.columns, :size).by(1)        
       }.should_not change(@table.rows, :size)
     end
+    
   end
   context "when updating a cell from a column perspective" do
+    
     it "should keep all the others perspectives updated (it should be the same cell)" do
       @column = [1, 2, 3]
       @table = Bricks::Table.new
@@ -101,6 +125,7 @@ describe Bricks::Table do
       @table.columns[0][2].should == "NEW VALUE"
       @table.columns[0][2] === @table.rows[2][0]
     end
+    
   end
   context "when defining column headers" do
 
@@ -117,13 +142,15 @@ describe Bricks::Table do
       @table.columns.header['Email'].index.should == 2
     end
   end
-  context "accessingcolumns using their names" do
+  context "accessing columns using their names" do
     before do
       @table = Bricks::Table.new(@data)
     end
+    
     it "should allow you to get a given column by index" do
       @table.columns[1].should == ['lucas', 'tam']
     end
+    
     it "should allow you to get a given column by name" do
       @table.columns.header['Nombre'].index = 1
       @table.columns['Nombre'].should == ['lucas', 'tam']
