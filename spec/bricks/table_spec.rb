@@ -71,6 +71,7 @@ describe Bricks::Table do
     end
     it "should allow appending" do
       @table.should have(1).columns
+      @table.columns.first.should == @column
     end
     it "should store Cell objects" do
       @table.columns.each do |column|
@@ -89,6 +90,16 @@ describe Bricks::Table do
           @table.add_column %w(mary john lucas)
         }.should change(@table.columns, :size).by(1)        
       }.should_not change(@table.rows, :size)
+    end
+  end
+  context "when updating a cell from a column perspective" do
+    it "should keep all the others perspectives updated (it should be the same cell)" do
+      @column = [1, 2, 3]
+      @table = Bricks::Table.new
+      @table.add_column @column
+      @table.rows[2][0].value = "NEW VALUE" # last row, first cell
+      @table.columns[0][2].should == "NEW VALUE"
+      @table.columns[0][2] === @table.rows[2][0]
     end
   end
   context "column names" do
