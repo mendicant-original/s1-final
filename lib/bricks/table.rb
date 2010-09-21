@@ -58,8 +58,7 @@ module Bricks
     end
     def add_and_update(array, primary, secondary )
       new_array = []
-      array.each_with_index do |value, index| 
-        cell = build_cell(value)
+      with_cells_in(array) do |cell, index|
         new_array << cell 
         secondary[index] ||= []
         secondary[index] << cell
@@ -68,13 +67,17 @@ module Bricks
     end
     def insert_at_and_update(position, array, primary, secondary )
       new_array = []
-      array.each_with_index do |value, index| 
-        cell = build_cell(value)
+      with_cells_in(array) do |cell, index|
         new_array << cell 
         secondary[index] ||= []
         secondary[index].insert(position, cell)
       end
       primary.insert(position, new_array)
+    end
+    def with_cells_in(array)
+      array.each_with_index do |value, index| 
+        yield(build_cell(value), index)
+      end
     end
   end
 end
