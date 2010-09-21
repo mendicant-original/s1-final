@@ -34,27 +34,47 @@ describe Bricks::Table do
     end
     
   end
-  it "should allow appending" do
-    @table = Bricks::Table.new
-    @table.add_row [1, "Rolando", "rola@tony.com"]
-    @table.should have(1).rows
-  end
-  it "should store Cell objects" do
-    @table = Bricks::Table.new
-    @table.add_row [1, "Rolando", "rola@tony.com"]
-    @table.rows.each do |row|
-      row.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
+  context "handling rows" do
+    before do
+      @row = [1, "Rolando", "rola@tony.com"]
+      @table = Bricks::Table.new
+      @table.add_row @row      
+    end
+    it "should allow appending" do
+      @table.should have(1).rows
+    end
+    it "should store Cell objects" do
+      @table.rows.each do |row|
+        row.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
+      end
+    end
+    it "should keep the columns updated when adding rows"  do
+      @table.columns.should have(3).elements
+      @table.columns[0][0].should == @row[0]
+      @table.columns[1][0].should == @row[1]
+      @table.columns[2][0].should == @row[2]
     end
   end
-  it "should keep the columns updated when adding rows"  do
-    data = [1, "Rolando", "rola@tony.com"]
-    @table = Bricks::Table.new
-    @table.add_row data
-    @table.columns.should have(3).elements
-    @table.columns[0][0].should == data[0]
-    @table.columns[1][0].should == data[1]
-    @table.columns[2][0].should == data[2]
-
+  context "handling columns" do
+    before do
+      @column = [1, "Rolando", "rola@tony.com"]
+      @table = Bricks::Table.new
+      @table.add_column @column
+    end
+    it "should allow appending" do
+      @table.should have(1).columns
+    end
+    it "should store Cell objects" do
+      @table.columns.each do |column|
+        column.each { |cell| cell.should be_a_kind_of(Bricks::Cell) }
+      end
+    end
+    it "should keep the columns updated when adding rows"  do
+      @table.rows.should have(3).elements
+      @table.rows[0][0].should == @column[0]
+      @table.rows[1][0].should == @column[1]
+      @table.rows[2][0].should == @column[2]
+    end
   end
   context "column names" do
     it "should allow to set the column name of a given column" do
