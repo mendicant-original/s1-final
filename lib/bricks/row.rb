@@ -2,7 +2,7 @@ module Bricks
   class Row
     attr_accessor :cells
     include Enumerable
-    # include Comparable
+
     def initialize(array = [])
       @cells = []
       array.each { |value| add_cell(value) }
@@ -12,6 +12,9 @@ module Bricks
     end
     def to_a
       @cells.map { |cell| cell.value }
+    end
+    def [](index)
+      @cells[index]
     end
   private
     def add_cell(value)
