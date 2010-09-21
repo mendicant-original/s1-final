@@ -11,5 +11,10 @@ table = Bricks::Table.new
 Add a row
 
 <pre>
-table.rows << [1, 2, 3]
+table.add_row [1, 2, 3]
+table.columns.should have(3).elements
 </pre>
+
+table = Bricks::Table.new
+table.cells # => []
+table.add_row # => []
