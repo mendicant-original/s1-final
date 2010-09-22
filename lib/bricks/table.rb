@@ -1,6 +1,8 @@
 module Bricks
   class Table
+    
     include Enumerable
+    
     attr_accessor :options
     attr_reader :rows, :columns
     
@@ -56,16 +58,21 @@ module Bricks
     def empty?
       rows.empty?
     end
+    
     def to_a
       rows.to_a
     end
-  private
+    
+    private
+    
     def build_cell(value)
       value.kind_of?(Bricks::Cell) ? value : Bricks::Cell.new(value) 
     end
+    
     def extract_options!(args)
       args.last.is_a?(::Hash) ? args.pop : {}
     end
+    
     def add_and_update(array, primary, secondary )
       new_array = []
       with_cells_in(array) do |cell, index|
@@ -75,6 +82,7 @@ module Bricks
       end
       primary << new_array
     end
+    
     def insert_at_and_update(position, array, primary, secondary )
       new_array = []
       with_cells_in(array) do |cell, index|
@@ -84,10 +92,12 @@ module Bricks
       end
       primary.insert(position, new_array)
     end
+    
     def delete_at_and_update(position, primary, secondary )
       secondary.each { |a| a.delete_at(position)  }  
       primary.delete_at(position)
     end
+    
     def with_cells_in(array)
       array.each_with_index do |value, index| 
         yield(build_cell(value), index)
