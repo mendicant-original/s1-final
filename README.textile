@@ -1,5 +1,18 @@
 h1. Bricks
 
+
+h2. Installation
+
+<pre>
+bundle install
+</pre>
+
+h2. See example at run.rb
+
+<pre>
+ruby run.rb
+</pre>
+
 h2. Basic Usage
 
 Create a Table object

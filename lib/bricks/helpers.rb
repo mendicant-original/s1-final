@@ -5,9 +5,11 @@ module Bricks
       value.insert(0, "$")
     end
 
-    def array_to_money(array)
-      array.each do |amount|
-        amount.value = monetize(amount.value)
+    def array_to_money(*arrays)
+      arrays.each do |array|
+        array.each do |amount|
+          amount.value = monetize(amount.value)
+        end
       end
     end
     def parse_date_us(value)

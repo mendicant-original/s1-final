@@ -7,30 +7,37 @@ require 'date'
 base = File.expand_path(File.dirname(__FILE__))
 require File.join(base, "lib", "bricks")
 
-data_file = File.join("data", "s1-exam-data.yaml")
-data = YAML.load_file(data_file)
+input_file = "s1-exam-data.yaml"
+output_file = "s1-exam-data-transformed.yaml"
 
+data = YAML.load_file(input_file)
+
+# Include helper methods
 include Bricks::Helpers
 
+# Load table
 table = Bricks::Table.new(data, :first_row_as_header => true)
 
+# Delete COUNT column
 table.delete_column_at(4)
 
-array_to_money(table.columns['AMOUNT'])
-array_to_money(table.columns['TARGET_AMOUNT'])
-array_to_money(table.columns['AMTPINSPAID'])
+# Convert money columns
+array_to_money(table.columns['AMOUNT'], table.columns['TARGET_AMOUNT'], table.columns['AMTPINSPAID'])
 
+# Convert PROCEDURE_DATE field to YYYY/MM/DD
 table.columns['PROCEDURE_DATE'].each do |date|
   date.value = parse_date_us(date.value).strftime("%Y/%m/%d")
 end
 
+# Remove Old Rows
+date_limit = Date.new(2006,06,01) 
 table.rows.select! do |row|
-  limit = Date.new(2006,06,01) 
   procedure_date = parse_date_universal(row[0].value)
-  (limit - procedure_date).to_i < 0
+  (date_limit - procedure_date).to_i < 0
 end
 
-File.open(File.join("data", "s1-exam-data-transformed.yaml"), "w") do |file|
+# Save to file
+File.open(output_file, "w") do |file|
   file.write YAML.dump(table.to_a)
 end
 
