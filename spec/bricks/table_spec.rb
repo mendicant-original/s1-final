@@ -51,6 +51,13 @@ describe Bricks::Table do
       @table.insert_row_at 0, new_row
       @table.rows[0].should == new_row
     end
+
+    it "should allow deletion" do
+      @table.insert_row_at 0, [2, "jose", "jose@soprano.com"]
+      lambda {
+         @table.delete_row_at 0
+      }.should change(@table.rows, :size).by(-1)
+    end
     
     it "should store Cell objects" do
       @table.rows.each do |row|
@@ -91,6 +98,12 @@ describe Bricks::Table do
       new_column = ["juan", "pepe", "luis"]
       @table.insert_column_at 0, new_column
       @table.columns[0].should == new_column
+    end
+    
+    it "should allow deletion" do
+      lambda {
+         @table.delete_column_at 0
+      }.should change(@table.columns, :size).by(-1)
     end
     
     it "should store Cell objects" do

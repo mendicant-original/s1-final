@@ -30,6 +30,10 @@ module Bricks
     def insert_row_at(position, row)
       insert_at_and_update(position, row, rows, columns)
     end
+
+    def delete_row_at(position)
+      delete_at_and_update(position, rows, columns)
+    end
     
     def add_column(new_column)
       add_and_update(new_column, columns, rows)
@@ -37,6 +41,10 @@ module Bricks
     
     def insert_column_at(position, column)
       insert_at_and_update(position, column, columns, rows)
+    end
+    
+    def delete_column_at(position)
+      delete_at_and_update(position, columns, rows)
     end
     
     def each
@@ -73,6 +81,10 @@ module Bricks
         secondary[index].insert(position, cell)
       end
       primary.insert(position, new_array)
+    end
+    def delete_at_and_update(position, primary, secondary )
+      secondary.each { |a| a.delete_at(position)  }  
+      primary.delete_at(position)
     end
     def with_cells_in(array)
       array.each_with_index do |value, index| 
