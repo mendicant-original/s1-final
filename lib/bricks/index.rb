@@ -1,5 +1,11 @@
+require 'delegate'
+
 module Bricks
-  class Index < Array
+  class Index < DelegateClass(Array)
+    
+    def initialize
+      super(Array.new)
+    end
     
     def header
       @header ||= Hash.new { |hash, key| hash[key] = Bricks::Column.new  }
