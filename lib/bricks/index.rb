@@ -11,7 +11,9 @@ module Bricks
     def [](index)
       super(index_for(index))
     end
-    
+    def to_a
+      super.map {|e| e.map { |a| a.value  } }
+    end
   private
     def index_for(index)
       if index.kind_of?(String) and !header[index].nil?

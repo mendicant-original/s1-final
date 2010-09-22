@@ -12,5 +12,10 @@ data = YAML.load_file(data_file)
 
 table = Bricks::Table.new(data, :first_row_as_header => true)
 
+c = table.to_a
+File.open(File.join("data", "s1-exam-data-transformed.yaml"), "w") do |file|
+  file.write YAML.dump(c)
+end
+
 puts "Example Data Size: #{data.size}"
 puts "Table Size: #{table.rows.size} "

@@ -56,7 +56,9 @@ module Bricks
     def empty?
       rows.empty?
     end
-    
+    def to_a
+      rows.to_a
+    end
   private
     def build_cell(value)
       value.kind_of?(Bricks::Cell) ? value : Bricks::Cell.new(value) 
