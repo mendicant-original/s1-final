@@ -8,5 +8,11 @@ module Bricks
     def <=>(anOther)
       self.value <=> anOther
     end
+    def to_s
+      value
+    end
+    def inspect
+      to_s
+    end
   end
 end
