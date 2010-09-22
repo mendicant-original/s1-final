@@ -26,7 +26,7 @@ array_to_money(table.columns['AMOUNT'], table.columns['TARGET_AMOUNT'], table.co
 
 # Convert PROCEDURE_DATE field to YYYY/MM/DD
 table.columns['PROCEDURE_DATE'].each do |date|
-  date.value = parse_date_us(date.value).strftime("%Y/%m/%d")
+  date.value = parse_date_us(date.value).strftime("%Y-%m-%d")
 end
 
 # Remove Old Rows

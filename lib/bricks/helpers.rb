@@ -21,7 +21,7 @@ module Bricks
     end
     
     def parse_date_universal(value)
-      year, month, day = value.split("/").map {|e| e.to_i}
+      year, month, day = value.split("-").map {|e| e.to_i}
       year += 2000 if year < 70 # arbitrary 
       Date.new(year, month, day)
     end
