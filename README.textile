@@ -1,5 +1,6 @@
 h1. Bricks
 
+Is a library that allows you to access a table (array of arrays) from rows or columns. It does not duplicate data. It just keeps two different indexes. One for rows, and one for columns. 
 
 h2. Installation
 
