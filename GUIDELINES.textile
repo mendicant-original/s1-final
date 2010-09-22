@@ -49,9 +49,9 @@ some of the necessary features for a usable data table implementation.
 
     * Retrieve an array (or Row object) consisting of all the contents
       in that row
-    * Append a row to the end of the table
-    * Insert a row at any position in the table
-    * Delete any row
+    * Append a row to the end of the table - [DONE]
+    * Insert a row at any position in the table - [DONE]
+    * Delete any row [DONE]
     * Run a transformation on a row which changes its content
       based on the return value of a block.
       (Similar to Enumerable#map)
@@ -59,10 +59,10 @@ some of the necessary features for a usable data table implementation.
 - It should be possible to do all of the following column manipulations:
     * Retrieve an array (or Column object) consisting of
       all the contents in that column
-    * Rename a column, if header support is enabled
-    * Append a column to the right side of the table
-    * Insert a column at any position in the table
-    * Delete any column
+    * Rename a column, if header support is enabled [DONE]
+    * Append a column to the right side of the table [DONE]
+    * Insert a column at any position in the table [DONE]
+    * Delete any column [DONE]
     * Run a transformation on a column which changes its content
       based on the return value of a block.
 
