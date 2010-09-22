@@ -9,8 +9,7 @@ module Bricks
       end
     end
     def [](index)
-      index = index_for(index)
-      super(index)
+      super(index_for(index))
     end
     
   private
