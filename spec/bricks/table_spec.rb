@@ -80,6 +80,18 @@ describe Bricks::Table do
         }.should_not change(@table.columns, :size)        
       }.should change(@table.rows, :size).by(1)
     end
+    it "should support map and all the Enumerable operations" do
+      @table.rows.each do |row|
+        row[0] = 10000
+        row[1] = "Joseph"
+        row[2] = "por@onga.com"
+      end
+      @table.rows.each do |row|
+        row[0].should == 10000
+        row[1].should == "Joseph"
+        row[2].should == "por@onga.com"
+      end
+    end
   end
   context "handling columns" do
     

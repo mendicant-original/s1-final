@@ -53,7 +53,7 @@ some of the necessary features for a usable data table implementation.
     * Insert a row at any position in the table - [DONE]
     * Delete any row [DONE]
     * Run a transformation on a row which changes its content
-      based on the return value of a block.
+      based on the return value of a block.[DONE]
       (Similar to Enumerable#map)
 
 - It should be possible to do all of the following column manipulations:
@@ -64,7 +64,7 @@ some of the necessary features for a usable data table implementation.
     * Insert a column at any position in the table [DONE]
     * Delete any column [DONE]
     * Run a transformation on a column which changes its content
-      based on the return value of a block.
+      based on the return value of a block.[DONE]
 
 - It should be possible to do the following filtering:
     * Reduce a table to contain only the rows that pass a conditional
