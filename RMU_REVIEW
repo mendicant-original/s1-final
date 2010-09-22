@@ -1,0 +1,55 @@
+- Setup
+
+Do bundle install in your directory. 
+
+This library has been tested with Ruby 1.9.2, but I think it should work with MRI 1.8.7 with no changes. 
+
+- Usage
+
+table = Bricks::Table.new(array_of_arrays) # will load all the data into the table.
+
+You'll be able to access the table by rows doing:
+
+table.rows
+
+Or by columns doing: 
+
+table.columns
+
+-- Column names
+
+You can set column names when creating the table like this:
+
+table = Bricks::Table.new(array_of_arrays, :header => %w(id name email) )
+
+Or specify to obtain the header from the first row:
+
+table = Bricks::Table.new(array_of_arrays, :first_row_as_header => true)
+
+-- Accessing one specific row
+
+table.rows[0]
+
+-- Accessing one specific column by index
+
+table.columns[0]
+
+-- Accessing one specific column by name
+
+Provided that you have specified column names before (in the constructor) you can do this:
+
+table.columns['name']
+
+---NOTE---
+
+More information reading the specs, or the README. 
+
+- September's Accomplishments 
+
+https://github.com/lucasefe/s1-e1 #  Twitter Bot
+https://github.com/lucasefe/s1-e2 #  Badges system
+http://github.com/sandal/guides/wiki/STDLIB:-MiniTest # NOT FINISHED!
+https://github.com/rmu/s1-exam-lucasefe # Final exam
+
+What a rollercoaster, man. It's been great. I have learned a lot. I have not enough words of appreciation for what you have done. Thank you very much.  
+
