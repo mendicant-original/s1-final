@@ -44,12 +44,16 @@ table.columns['name']
 
 More information reading the specs, or the README. 
 
-- September's Accomplishments 
+- Accomplishments 
 
-https://github.com/lucasefe/s1-e1 #  Twitter Bot
-https://github.com/lucasefe/s1-e2 #  Badges system
-http://github.com/sandal/guides/wiki/STDLIB:-MiniTest # NOT FINISHED!
-https://github.com/rmu/s1-exam-lucasefe # Final exam
+I've accomplished several things:
 
-What a rollercoaster, man. It's been great. I have learned a lot. I have not enough words of appreciation for what you have done. Thank you very much.  
+* Interact with Enumerable in a cleanly way. 
 
+* To use DelegateClass, to avoid inheriting from standard classes, like Array or Hash. 
+
+* To really think about problems. I spent a lot of time thinking about how to accomplish this thing in a ruby-way, writing clean, maintainable and easy to read code. 
+
+* The value of testing. 
+
+* Finally, coding style. Use vertical spaces. Lots. To do not indent private or public. 
