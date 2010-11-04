@@ -1,0 +1,103 @@
+Final Exam, RMU Session 1
+SUBMISSIONS DUE: 12:00 UTC 9/27
+
+= Building a Data::Table datastructure
+
+Working with tabular data is a common task in many Ruby applications,
+especially those that involve some reporting tasks.  In this exam,
+you'll be building a general purpose table structure that can be used in
+a wide range of data
+processing scenarios.
+
+You are expected to build the system described in the REQUIREMENTS
+section of this document, and to demonstrate its functionality by
+building out the program described in the EXAMPLE SCENARIO.
+
+Please run a timer while working on this problem, and do not spend more
+than 6 hours total before making your initial submission.  You will then
+have a chance to make changes based on my feedback if necessary.  It is
+important to follow this time limit guideline to help me gauge the
+difficulty level of the problem.
+
+Until all students have been evaluated, please keep your results private
+ and do not discuss this problem with anyone else outside of clarifying
+ questions on IRC and the mailing list.
+
+If you find yourself running short on time or getting stuck on one
+particular feature, try to make sure that you focus on making whatever
+you do submit well polished.  I would much prefer a half-product than a
+half-ass product here.
+
+That said, try to get as far as you can.  Enjoy, and good luck!
+
+REQUIREMENTS:
+
+While not a complete specification, the following requirements outline
+some of the necessary features for a usable data table implementation.
+
+- It should be possible to create a new table object by initializing it
+  with a two dimensional array, in which each inner array represents
+  the data for a single row.
+
+- It should also be possible to create a new table object that is empty
+  at first, and gets its data appended row by row later.
+
+- It should be possible to set column names, and then refer to the
+  columns by name anywhere that a column needs to be identified.
+
+- Whether or not column names are set, it should always be possible to
+  refer to the column by its zero-based ordinal position.
+
+- It should be possible to lookup a cell's contents by row (zero based
+  index) and column (index or column name).
+
+- It should be possible to do all of the following row manipulations:
+
+     * Retrieve an array (or Row object) consisting of all the contents
+       in that row
+     * Append a row to the end of the table
+     * Insert a row at any position in the table
+     * Delete any row
+     * Run a transformation on a row which changes its content
+       based on the return value of a block.
+       (Similar to Enumerable#map)
+
+- It should be possible to do all of the following column manipulations:
+     * Retrieve an array (or Column object) consisting of
+       all the contents in that column
+     * Rename a column, if header support is enabled
+     * Append a column to the right side of the table
+     * Insert a column at any position in the table
+     * Delete any column
+     * Run a transformation on a column which changes its content
+       based on the return value of a block.
+
+- It should be possible to do the following filtering:
+     * Reduce a table to contain only the rows that pass a conditional
+       block (similar to Enumerable#select)
+     * Reduce a table to contain only the columns that pass a
+       conditional block (similar to Enumerable#select)
+
+EXAMPLE SCENARIO:
+
+In the attached yaml file (s1-exam-data.yaml), you will find some sample
+data which includes dates, money fields in integral cents, and a 'count'
+column. Using the data table structure you built, perform the following
+manipulations:
+
+1. Restrict the rows to dates that occur in June 2006
+2. Convert the AMOUNT, TARGET_AMOUNT, and AMTPINSPAID columns to money
+format. (e.g 1500 becomes $15.00)
+3. Remove the Count column
+4. Change the date format to YYYY-MM-DD
+5. Convert the table to an array of arrays, and then write out a YAML
+file called 's1-exam-data-transformed.yaml', including the headers as
+the first row.
+6. Check this file and the code used to generate it into your repository
+for review.
+
+I will be running a diff against the YAML file and comparing it to a
+standard file I produced, so please try to follow the above as exactly
+as possible.  While a mismatch won't necessarily cause you to fail, a
+match will surely help you to succeed. 
+
